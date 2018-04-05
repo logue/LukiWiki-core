@@ -1,0 +1,34 @@
+{
+    "name": "logue/LukiWiki-core",
+    "description": "LukiWiki Core Library",
+    "homepage": "https://github.com/logue/LukiWiki-core",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Logue\\LukiWiki\\": "src/LukiWiki/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Logue\\LukiWiki\\": "tests/"
+        }
+    },
+    "require": {
+        "illuminate/cache": "*",
+        "monolog/monolog": "*",
+        "sters/regexp-trie": "*",
+        "vlucas/phpdotenv": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Logue",
+            "email": "logue@hotmail.co.jp"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "psy/psysh": "*"
+    }
+}
