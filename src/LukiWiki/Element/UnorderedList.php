@@ -7,14 +7,14 @@
  * @license   MIT
  */
 
-namespace App\LukiWiki\Element;
+namespace Logue\LukiWiki\Element;
 
 /**
  * - One
  * -- Two
  * --- Three.
  */
-class UList extends ListContainer
+class UnorderedList extends ListContainer
 {
     public function __construct($root, $text, $isAmp)
     {

@@ -121,11 +121,11 @@ abstract class AbstractElement
     {
         $attributes = [];
         foreach ($param as $key => $value) {
-            $attributes[] = $key.'="'.$value.'"';
+            $attributes[] = $key.'="'.self::processText($value).'"';
         }
 
         return ($canomit && empty($string)) ? '' :
-            '<'.$tag.(count($attributes) !== 0 ? ' '.implode(' ', $attributes) : '').'>'.trim($innerHtml).'</'.$tag.'>';
+        '<'.$tag.(count($attributes) !== 0 ? ' '.implode(' ', $attributes) : '').'>'.trim($innerHtml).'</'.$tag.'>';
     }
 
     /***

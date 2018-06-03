@@ -18,11 +18,11 @@ class ListContainer extends AbstractElement
 {
     protected $tag = 'ul';
     protected $tag2 = 'li';
-    public $level = 0;
+    protected $level = 0;
     protected $isAmp;
-    protected $pattern = '/^[\-|\+]/';
+    protected $pattern = '/^[\-|\+]{1,3}(\w+?)$/';
 
-    public function __construct(string $tag, string $tag2, string $head, string $text, bool $isAmp)
+    public function __construct(string $tag, string $tag2, string $head, string $text, bool $isAmp = false)
     {
         parent::__construct();
         $this->tag = $tag;
@@ -33,7 +33,7 @@ class ListContainer extends AbstractElement
 
         $element = new ListElement($this->level, $tag2);
 
-        parent::insert($element);
+        $this->insert($element);
         if (!empty($text)) {
             $content = new InlineElement($text, $this->isAmp);
             $this->meta = $content->getMeta();
@@ -47,12 +47,12 @@ class ListContainer extends AbstractElement
             || ($this->tag === $obj->tag && $this->level === $obj->level);
     }
 
-    public function prepend(object $parent)
+    public function setParent(object $parent)
     {
-        parent::prepend($parent);
+        parent::setParent($parent);
 
         $step = $this->level;
-        if (isset($parent->parent) && $parent->parent instanceof self) {
+        if (isset($parent->parent) && ($parent->parent instanceof self)) {
             $step -= $parent->parent->level;
         }
     }

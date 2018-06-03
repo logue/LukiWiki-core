@@ -9,27 +9,28 @@
 
 namespace Logue\LukiWiki\Element;
 
+use Logue\LukiWiki\AbstractElement;
 use Logue\LukiWiki\Rules\HeadingAnchor;
 
 /**
- * * Heading1
- * ** Heading2
- * *** Heading3
- * **** Heading4
- * ***** Heading5.
+ * # Heading1
+ * ## Heading2
+ * ### Heading3
+ * #### Heading4
+ * ##### Heading5.
  */
-class Heading extends Element
+class Heading extends AbstractElement
 {
     protected $level;
     protected $id;
     protected $text;
-    protected $pattern = '/^*{1,5}(\w+?)$/';
+    protected $pattern = '/^\#{1,5}(\w+?)$/';
 
     public function __construct(object $root, string $text, bool $isAmp)
     {
         parent::__construct();
 
-        $this->level = min(5, strspn($text, '*'));
+        $this->level = min(5, strspn($text, '#'));
         list($text, $this->msg_top, $this->id) = $root->getAnchor($text, $this->level);
 
         $content = new InlineElement($text, $isAmp);

@@ -14,7 +14,7 @@ class HeadingAnchor
     /**
      * 見出しの固有IDのマッチパターン.
      */
-    const HEADING_ID_PATTERN = '/^(\*{1,3})(.*?)(?:\[#([A-Za-z0-9][\w-]*)\]\s*)?$/m';
+    const HEADING_ID_PATTERN = '/^(\#{1,5})(.*?)(?:\[#([A-Za-z0-9][\w-]*)\]\s*)?$/m';
     /**
      * 見出しのIDの生成で使用出来る文字.
      */
@@ -61,7 +61,7 @@ class HeadingAnchor
             $heading = trim($matches[2]);
             $id = isset($matches[3]) ? $matches[3] : null;
         } else {
-            $heading = preg_replace('/^\*{0,3}/', '', $str);
+            $heading = preg_replace('/^\#{1,5}/', '', $str);
             $level = 0;
         }
 

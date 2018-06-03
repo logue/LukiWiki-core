@@ -1,10 +1,11 @@
 #!/usr/bin/env php
 <?php
 // ↓名前空間を利用するプロジェクトでは記述しておく
+
 namespace Logue\LukiWiki;
 
 // Composerのオートローダーを読み込む
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 // ほかに初期化用のPHPファイルがあれば読み込んでおく
 // require_once …
 
@@ -12,13 +13,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 $dotenv = new \Dotenv\Dotenv(__DIR__.'/');
 $dotenv->load();
 
-echo __NAMESPACE__ . " shell\n";
+echo __NAMESPACE__." shell\n";
 
 $sh = new \Psy\Shell();
 
 // シェル起動直後にプロジェクトのnamespaceを設定する
 // 名前空間を利用しないプロジェクトでは↓の行は不要
-$sh->addCode(sprintf("namespace %s;", __NAMESPACE__));
+$sh->addCode(sprintf('namespace %s;', __NAMESPACE__));
 
 $sh->run();
 

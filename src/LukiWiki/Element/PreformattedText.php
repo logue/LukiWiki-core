@@ -1,6 +1,6 @@
 <?php
 /**
- *  GitHub Flavored Markdown Pre.
+ *  Preformatted Text.
  *
  * @author    Logue <logue@hotmail.co.jp>
  * @copyright 2018 Logue
@@ -14,21 +14,16 @@ use Logue\LukiWiki\AbstractElement;
 /**
  * ```lang ... ```.
  */
-class GfmPre extends AbstractElement
+class PreformattedText extends AbstractElement
 {
     private $lang;
     protected $pattern = '/^```?:(\w+?)$/';
 
-    public function __construct(object $root, string $text, string $lang)
+    public function __construct(object $root, string $text, string $lang = '')
     {
         parent::__construct();
         $this->lang = $lang;
         $this->elements[] = parent::processText($text);
-    }
-
-    public function canContain(object $obj)
-    {
-        return $obj instanceof self;
     }
 
     public function insert(object $obj)

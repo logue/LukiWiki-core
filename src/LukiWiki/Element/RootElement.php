@@ -64,7 +64,7 @@ class RootElement extends AbstractElement
             }
 
             // Multiline-enabled block plugin #plugin{{ ... }}
-            if (preg_match('/^#[^{]+(\{\{+)\s*$/', $line, $matches)) {
+            if (preg_match('/^\@[^{]+(\{\{+)\s*$/', $line, $matches)) {
                 $len = strlen($matches[1]);
                 $line .= self::MULTILINE_DELIMITER;
                 while (!empty($lines)) {
@@ -96,41 +96,31 @@ class RootElement extends AbstractElement
             // The first character
             $head = $line[0];
 
-            // Line Break
-            if (substr($line, -1) === '~') {
-                $line = substr($line, 0, -1)."\r";
-            }
-
             // Other Character
             if (is_object($this->last)) {
                 $content = null;
                 switch ($head) {
-                    case '*':
+                    case '#':
                         $this->insert(new Heading($this, $line, $this->isAmp));
                         continue;
                         break;
                     case '`':
-                        // GFM:pre
-                        if (preg_match('/\```(.+?)\r(.*)\r```/', $line, $matches)) {
-                            $content = new GfmPre($this, $matches[2], $matches[1]);
-                        }
-                        break;
-                    case ' ':
-                    case "\t":
                         // Pre
-                        $content = new Pre($this, $line);
+                        if (preg_match('/```(\w+?)\r(.*)\r```/', $line, $matches)) {
+                            $content = new PreformattedText($this, $matches[2], $matches[1]);
+                        }
                         break;
                     case '-':
                         if (substr($line, 0, 4) === '----') {
                             // Horizontal Rule
-                            $this->insert(new HRule($this, $line, $this->isAmp));
+                            $content = new HRule($this, $line, $this->isAmp);
                             continue;
                         }
                         // List
-                        $content = new UList($this, $line, $this->isAmp);
+                        $content = new UnorderedList($this, $line, $this->isAmp);
                         break;
                     case '+':
-                        $content = new OList($this, $line, $this->isAmp);
+                        $content = new OrderedList($this, $line, $this->isAmp);
                         break;
                     case '>':
                     case '<':
@@ -139,7 +129,7 @@ class RootElement extends AbstractElement
                     case ':':
                         $out = explode('|', ltrim($line), 2);
                         if (!count($out) < 2) {
-                            $content = new DList($out, $this->isAmp);
+                            $content = new DefinitionList($out, $this->isAmp);
                         }
                         break;
                     case '|':
@@ -147,13 +137,10 @@ class RootElement extends AbstractElement
                             $content = new Table($out, $this->isAmp);
                         }
                         break;
-                    case '#':
+                    case '@':
                         $matches = [];
 
-                        if ($line[1] === ' ' || $line[1] === "\t") {
-                            // CPre (Plus!)
-                            $content = $this->last->add(new SharpPre($this, $line));
-                        } elseif (preg_match('/^#([^\(\{]+)(?:\(([^\r]*)\))?(\{*)/', $line, $matches)) {
+                        if (preg_match('/^\@([^\(\{]+)(?:\(([^\r]*)\))?(\{*)/', $line, $matches)) {
                             // Plugin
                             $len = strlen($matches[3]);
                             $body = [];
@@ -178,18 +165,17 @@ class RootElement extends AbstractElement
                         break;
                 }
 
-                if (is_object($content)) {
-                    $meta = $content->getMeta();
-
-                    if (!empty($meta)) {
-                        foreach ($meta as $key => $value) {
-                            $this->meta[$key][] = $value;
-                        }
-                    }
-                }
-
                 // Default
                 if (!empty($content)) {
+                    if (is_object($content)) {
+                        $meta = $content->getMeta();
+
+                        if (!empty($meta)) {
+                            foreach ($meta as $key => $value) {
+                                $this->meta[$key][] = $value;
+                            }
+                        }
+                    }
                     $this->last = $this->last->append($content);
                 }
                 unset($content);
