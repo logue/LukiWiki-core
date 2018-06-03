@@ -18,7 +18,7 @@ use Logue\LukiWiki\InlineConverter;
 class InlineElement extends AbstractElement
 {
     private static $converter;
-    
+
     public function __construct(string $text, bool $isAmp)
     {
         parent::__construct();

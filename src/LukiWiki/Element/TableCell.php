@@ -74,7 +74,6 @@ class TableCell extends AbstractElement
             }
         }
 
-        
         if ($text === '>') {
             $this->colspan = 0;
         } elseif ($text === '~') {

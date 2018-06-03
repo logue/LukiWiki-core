@@ -20,6 +20,7 @@ class ListContainer extends AbstractElement
     protected $tag2 = 'li';
     public $level = 0;
     protected $isAmp;
+    protected $pattern = '/^[\-|\+]/';
 
     public function __construct(string $tag, string $tag2, string $head, string $text, bool $isAmp)
     {

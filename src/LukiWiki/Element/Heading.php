@@ -9,7 +9,6 @@
 
 namespace Logue\LukiWiki\Element;
 
-use Logue\LukiWiki\AbstractElement;
 use Logue\LukiWiki\Rules\HeadingAnchor;
 
 /**
@@ -24,6 +23,7 @@ class Heading extends Element
     protected $level;
     protected $id;
     protected $text;
+    protected $pattern = '/^*{1,5}(\w+?)$/';
 
     public function __construct(object $root, string $text, bool $isAmp)
     {

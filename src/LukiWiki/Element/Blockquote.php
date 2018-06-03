@@ -18,8 +18,9 @@ use Logue\LukiWiki\AbstractElement;
 class Blockquote extends AbstractElement
 {
     protected $level;
+    protected $pattern = '/^[\>|\<]/';
 
-    public function __construct($root,string $text, bool $isAmp)
+    public function __construct($root, string $text, bool $isAmp)
     {
         parent::__construct();
 
@@ -42,7 +43,7 @@ class Blockquote extends AbstractElement
         }
     }
 
-    public function canContain(object$obj)
+    public function canContain(object $obj)
     {
         return !($obj instanceof self) || $obj->level >= $this->level;
     }
@@ -68,7 +69,7 @@ class Blockquote extends AbstractElement
         return $this->wrap(parent::__toString(), 'blockquote', ['class' => 'blockquote'], false);
     }
 
-    private function end(object $root,int $level)
+    private function end(object $root, int $level)
     {
         $parent = $root->last;
 

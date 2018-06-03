@@ -25,12 +25,12 @@ class InterWikiName extends AbstractInline
     const INTERWIKINAME_MAX_LENGTH = 512;
 
     private static $encode_aliases = [
-        'sjis' => 'SJIS',
-        'euc' => 'EUC-JP',
-        'utf8' => 'UTF-8',
-        'gbk' => 'CP936',
+        'sjis'  => 'SJIS',
+        'euc'   => 'EUC-JP',
+        'utf8'  => 'UTF-8',
+        'gbk'   => 'CP936',
         'euckr' => 'EUC-KR',
-        'big5' => 'BIG5',
+        'big5'  => 'BIG5',
     ];
 
     protected $url = '';

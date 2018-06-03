@@ -1,6 +1,6 @@
 <?php
 /**
- * ブロック型プラグインクラス.（予定）
+ * ブロック型プラグインクラス.（予定）.
  *
  * @author    Logue <logue@hotmail.co.jp>
  * @copyright 2013-2014,2018 Logue
@@ -9,8 +9,6 @@
 
 namespace Logue\LukiWiki\Element;
 
-use Logue\LukiWiki\AbstractElement;
-
 /**
  *  Block plugin: #something (started with '#').
  */
@@ -18,6 +16,8 @@ class BlockPlugin extends Element
 {
     protected $name;
     protected $param;
+
+    protected $pattern = '/^#/';
 
     public function __construct(string $out)
     {

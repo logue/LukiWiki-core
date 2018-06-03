@@ -13,8 +13,9 @@ class Alignment
 {
     /**
      * ブロック型.
-     * 
+     *
      * @param string $align
+     *
      * @return string
      */
     public static function block(string $align)
@@ -45,9 +46,10 @@ class Alignment
     }
 
     /**
-     * インライン型
+     * インライン型.
      *
      * @param string $align
+     *
      * @return string
      */
     public static function inline($align)

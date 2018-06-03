@@ -15,9 +15,11 @@ namespace Logue\LukiWiki;
 abstract class AbstractElement
 {
     protected $parent;
-    protected $elements = [];    // References of childs
-    protected $last;        // Insert new one at the back of the $last
+    protected $elements = [];
+    protected $last;
     protected $meta = null;
+
+    protected $pattern = '';
 
     /**
      * コンストラクタ
@@ -39,11 +41,24 @@ abstract class AbstractElement
     }
 
     /**
+     * 変換処理の判定.
+     */
+    public function match(string $line)
+    {
+        if ($this->pattern[0] === '/') {
+            // 定義されているマッチパターンの先頭の文字が/だった場合は正規表現で判定する
+            return preg_match($this->pattern, $line);
+        }
+
+        return $this->pattern === $line[0];
+    }
+
+    /**
      * 親要素に挿入.
      *
      * @param object $obj
      */
-    public function prepend(object $parent)
+    public function setParent(object $parent)
     {
         $this->parent = $parent;
     }
@@ -59,7 +74,7 @@ abstract class AbstractElement
             return $this->insert($obj);
         }
         if (is_object($this->parent)) {
-            return $this->parent->add($obj);
+            return $this->parent->insert($obj);
         }
     }
 

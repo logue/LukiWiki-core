@@ -54,7 +54,7 @@ class RootElement extends AbstractElement
                     if ($cmd === 'title') {
                         $this->meta['title'] = $matches[2];
                     } elseif (is_object($this->last)) {
-                        $this->last = $this->last->add(new Align($cmd));
+                        $this->last = $this->last->append(new Align($cmd));
                     }
                 }
                 if (empty($matches[2])) {
@@ -80,7 +80,7 @@ class RootElement extends AbstractElement
 
             // Github Markdown互換シンタックスハイライト記法
             $lang = null;
-            if (preg_match('/^```.+?$/', $line, $matches)) {
+            if (preg_match('/^```?:(\w+?)$/', $line, $matches)) {
                 $line .= self::MULTILINE_DELIMITER;
                 while (!empty($lines)) {
                     $next_line = preg_replace('/['.self::MULTILINE_DELIMITER.'\n]*$/', '', array_shift($lines));
@@ -190,7 +190,7 @@ class RootElement extends AbstractElement
 
                 // Default
                 if (!empty($content)) {
-                    $this->last = $this->last->add($content);
+                    $this->last = $this->last->append($content);
                 }
                 unset($content);
                 continue;

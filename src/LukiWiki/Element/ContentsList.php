@@ -9,7 +9,6 @@
 
 namespace Logue\LukiWiki\Element;
 
-
 /**
  * 目次リスト.
  */

@@ -2,9 +2,9 @@
 
 namespace Logue\LukiWiki;
 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 use Monolog\Handler\RotatingFileHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class Log
 {

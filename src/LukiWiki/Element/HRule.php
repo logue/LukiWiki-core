@@ -16,6 +16,8 @@ use Logue\LukiWiki\AbstractElement;
  */
 class HRule extends AbstractElement
 {
+    protected $pattern = '/^-{4,}$/';
+
     public function __toString()
     {
         return '<hr />';

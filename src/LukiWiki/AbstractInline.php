@@ -9,8 +9,8 @@
 
 namespace Logue\LukiWiki;
 
-use Logue\LukiWiki\Rules\InlineRules;
 use Illuminate\Support\Facades\Config;
+use Logue\LukiWiki\Rules\InlineRules;
 
 /**
  * インライン要素パースクラス.

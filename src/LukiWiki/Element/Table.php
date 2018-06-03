@@ -29,6 +29,8 @@ class Table extends AbstractElement
         ''  => 'tbody',
     ];
 
+    protected $pattern = '/^\|(.+)\|([hHfFcC]?)$/';
+
     public function __construct($out, $isAmp)
     {
         parent::__construct();

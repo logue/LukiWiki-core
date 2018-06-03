@@ -13,11 +13,13 @@ use Logue\LukiWiki\AbstractElement;
 use Logue\LukiWiki\Rules\Alignment;
 
 /**
- * LEFT: / CENTER: / RIGHT: / JUSTIFY:.
+ * LEFT: / CENTER: / RIGHT: / JUSTIFY: / NOWRAP: / LOWERCASE:, UPPERCASE: TRUNCATE: .
  */
 class Align extends AbstractElement
 {
     protected $align;
+
+    protected $pattern = '/^(LEFT|CENTER|RIGHT|JUSTIFY|NOWRAP|LOWEWRCASE|UPPERCASE|TRUNCATE):(.*)$/';
 
     public function __construct(string $align)
     {

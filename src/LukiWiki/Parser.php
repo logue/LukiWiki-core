@@ -21,8 +21,8 @@ class Parser
     /**
      * LukiWikiファクトリークラス.
      *
-     * @param string $text Wikiのソース
-     * @param bool  $isAmp AMP対応フラグ
+     * @param string $text  Wikiのソース
+     * @param bool   $isAmp AMP対応フラグ
      *
      * @return string
      */

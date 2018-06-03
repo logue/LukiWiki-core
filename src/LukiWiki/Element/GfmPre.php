@@ -17,6 +17,7 @@ use Logue\LukiWiki\AbstractElement;
 class GfmPre extends AbstractElement
 {
     private $lang;
+    protected $pattern = '/^```?:(\w+?)$/';
 
     public function __construct(object $root, string $text, string $lang)
     {
