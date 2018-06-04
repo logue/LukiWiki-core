@@ -78,13 +78,26 @@ class RootElement extends AbstractElement
                 }
             }
 
-            // Github Markdown互換シンタックスハイライト記法
+            // 整形済みテキスト
             $lang = null;
             if (preg_match('/^```?:(\w+?)$/', $line, $matches)) {
                 $line .= self::MULTILINE_DELIMITER;
                 while (!empty($lines)) {
                     $next_line = preg_replace('/['.self::MULTILINE_DELIMITER.'\n]*$/', '', array_shift($lines));
                     if (preg_match('/^```$/', $next_line)) {
+                        $line .= $next_line;
+                        break;
+                    } else {
+                        $line .= $next_line .= self::MULTILINE_DELIMITER;
+                    }
+                }
+            }
+
+            if (preg_match('/^([\[[\s|x]\]|-|+])/', $line, $matches)) {
+                $line .= self::MULTILINE_DELIMITER;
+                while (!empty($lines)) {
+                    $next_line = preg_replace('/['.self::MULTILINE_DELIMITER.'\n]*$/', '', array_shift($lines));
+                    if ($next_line === '') {
                         $line .= $next_line;
                         break;
                     } else {

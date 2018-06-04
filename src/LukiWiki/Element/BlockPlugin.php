@@ -17,8 +17,6 @@ class BlockPlugin extends Element
     protected $name;
     protected $param;
 
-    protected $pattern = '/^#/';
-
     public function __construct(string $out)
     {
         parent::__construct();
